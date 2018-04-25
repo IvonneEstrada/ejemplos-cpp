@@ -17,17 +17,21 @@ public:
 Calentador::Calentador()
 {
     temperatura = 15;
-    imcremento = 3;
+    incremento = 3;
 }
 
 void Calentador::calentar()
 {
-    temperatura +=5;
+    if (temperatura + incremento <= 30){
+        temperatura += incremento;
+    }
 }
 
 void Calentador::enfriar()
 {
-    temperatura -=5;
+    if (temperatura - incremento >= -10){
+        temperatura -= incremento;
+    }
 }
 
 void Calentador::imprimetemperatura()
@@ -45,10 +49,13 @@ int main()
     Calentador c1;
     Calentador c2;
     
-    c1.calentar();
-    c1.imprimetemperatura();
-    
-    c2.enfriar();
-    c2.imprimetemperatura();
+    for(int i=0; i < 10; i++){
+        c1.calentar();
+        c1.imprimetemperatura();
+    }
+    for(int i=0; i < 10; i++){
+        c2.enfriar();
+        c2.imprimetemperatura();
+    }
 }
 
