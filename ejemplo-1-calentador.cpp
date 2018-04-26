@@ -5,38 +5,55 @@ class Calentador
 private:
     int temperatura;
     int incremento;
+    int min;
+    int max;
     
 public:
-    Calentador();
+    Calentador(int min, int max, int temperatura);
     void calentar();
     void enfriar();
-    void imprimetemperatura();
+    void imprimetemperatura() const;
     int accedeTemperatura() const;
+    void imprimeFarenheit() const;
 };  //punto y coma obligatorio
 
-Calentador::Calentador()
+Calentador::Calentador(int min, int max, int temperatura = 0)
 {
-    temperatura = 15;
+    if (min > max){
+        std::cout << "Error en el rango min-max" << std::endl;}
+        std::exit(EXIT_FAILURE);
+        
+        //throw "Error en el rango min-max";
+    }
+    if (temperatura >= min && temperatura <= max){
+        this->temperatura = temperatura;
+    }
+    else    {
+        this->temperatura = min;
+    }
     incremento = 3;
+    this->min = min;
+    this->max = max;
 }
 
 void Calentador::calentar()
 {
-    if (temperatura + incremento <= 30){
+    if (temperatura + incremento <= this->max){
         temperatura += incremento;
     }
 }
 
 void Calentador::enfriar()
 {
-    if (temperatura - incremento >= -10){
+    if (temperatura - incremento >= this->min){
         temperatura -= incremento;
     }
 }
 
-void Calentador::imprimetemperatura()
+void Calentador::imprimetemperatura() const
 {
-    std::cout << "La temperatura es " << temperatura << std::endl; 
+    std::cout << "La temperatura es " << temperatura 
+                << " °C" << std::endl; 
 }
 
 int Calentador::accedeTemperatura() const
@@ -44,18 +61,28 @@ int Calentador::accedeTemperatura() const
     return temperatura;
 }
 
+void Calentador::imprimeFarenheit() const
+{
+    float farenheit = temperatura * 1.8 + 32;
+    std::cout << "La temperatura es " << farenheit
+                << " °F" <<std::endl;
+}
+
 int main()
 {
-    Calentador c1;
-    Calentador c2;
-    
-    for(int i=0; i < 10; i++){
+    //try{
+        Calentador c1{-10, 10};
+        Calentador c2{30, 30, -10};
+        
         c1.calentar();
         c1.imprimetemperatura();
-    }
-    for(int i=0; i < 10; i++){
+        c1.imprimeFarenheit();
+     
         c2.enfriar();
         c2.imprimetemperatura();
-    }
+        c2.imprimeFarenheit();
+    /*}
+    catch(const std ::runtime_error &e);
+    */
 }
 
