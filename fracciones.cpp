@@ -12,6 +12,8 @@ public:
     Fraccion operator-(Fraccion otra);
     Fraccion operator*(Fraccion otra);
     Fraccion operator/(Fraccion otra);
+    friend void operator<<(std::ostream &, Fraccion); //cout pertenece a la clase ostream es de salida 
+    friend void operator>>(std::istream &, Fraccion); // cin pertenece a la clase istream es de entrada
 
 }; 
 
@@ -26,4 +28,7 @@ Fraccion Fraccion::operator+(Fraccion otra)
     this->numerador+otra.denominador;
     
     
+}
+
+
 }
