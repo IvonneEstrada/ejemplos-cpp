@@ -10,8 +10,11 @@ private:
     
 public:
     Polinomio(int a, int b, int c);
-    Polinomio operator()(int x);
+    int operator()(int x);
+    float operator~();
     
+friend void operator<<(std::ostream &salida, Polinomio p);
+friend void operator>>(std::istream &entrada, Polinomio &p);
     
 };
 
@@ -22,7 +25,7 @@ Polinomio::Polinomio(int a, int b, int c)
     this->c = c;
 }
 
-Polinomio Polinomio::operator()(int x)
+int Polinomio::operator()(int x)
 {
     int resultado;
     
